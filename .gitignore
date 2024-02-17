@@ -17,6 +17,5 @@ temp.errors
 .d/
 common.mk
 include/api.h
-include/display/licence.txt
-include/display/lv_conf.h
-include/display/lv_conf_checker.h
+include/display/*
+
