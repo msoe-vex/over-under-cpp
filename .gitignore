@@ -17,5 +17,5 @@ temp.errors
 .d/
 common.mk
 include/api.h
-include/display/*
-include/pros/*
+include/display/
+include/pros/
