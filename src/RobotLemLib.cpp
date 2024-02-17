@@ -42,6 +42,7 @@ void RobotLemLib::initialize()
     readConfig();
 
     /* Define the drivetrain components*/
+    // TODO configVector.second?? for Boolean reverse/true/false
     pros::Motor left_drive_1(configVector[0].first, pros::E_MOTOR_GEARSET_18, configVector[0]); // Port 1, Gearset, Reverse-False
     pros::Motor left_drive_2(configVector[1].first, pros::E_MOTOR_GEARSET_18, configVector[1]); // Port 1, Gearset, Reverse-False
     pros::Motor left_drive_3(configVector[2].first, pros::E_MOTOR_GEARSET_18, configVector[2]); // Port 1, Gearset, Reverse-False
