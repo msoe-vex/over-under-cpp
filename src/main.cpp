@@ -1,4 +1,5 @@
 #include "main.h"
+#include "lemlib/api.hpp"
 #include "nodes/actuator_nodes/MotorNode.h"
 #include "nodes/subsystems/IntakeNode.h"
 #include "RobotConfig.h"

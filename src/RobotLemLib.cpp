@@ -3,7 +3,7 @@
 void RobotLemLib::readConfig()
 {
     std::ifstream file;
-    file.open("/usd/RobotLemLib.txt");
+    file.open("/usd/robotLemLib.txt");
 
     if (file.is_open())
     {
@@ -42,18 +42,18 @@ void RobotLemLib::initialize()
     readConfig();
 
     /* Define the drivetrain components*/
-    pros::Motor left_drive_1(configVector[0].first, pros::E_MOTOR_GEARSET_18, configVector[0]) // Port 1, Gearset, Reverse-False
-    pros::Motor left_drive_2(configVector[1].first, pros::E_MOTOR_GEARSET_18, configVector[1]) // Port 1, Gearset, Reverse-False
-    pros::Motor left_drive_3(configVector[2].first, pros::E_MOTOR_GEARSET_18, configVector[2]) // Port 1, Gearset, Reverse-False
-    pros::Motor left_drive_4(configVector[3].first, pros::E_MOTOR_GEARSET_18, configVector[3]) // Port 1, Gearset, Reverse-False
+    pros::Motor left_drive_1(configVector[0].first, pros::E_MOTOR_GEARSET_18, configVector[0]); // Port 1, Gearset, Reverse-False
+    pros::Motor left_drive_2(configVector[1].first, pros::E_MOTOR_GEARSET_18, configVector[1]); // Port 1, Gearset, Reverse-False
+    pros::Motor left_drive_3(configVector[2].first, pros::E_MOTOR_GEARSET_18, configVector[2]); // Port 1, Gearset, Reverse-False
+    pros::Motor left_drive_4(configVector[3].first, pros::E_MOTOR_GEARSET_18, configVector[3]); // Port 1, Gearset, Reverse-False
 
-    pros::Motor right_drive_1(configVector[4].first, pros::E_MOTOR_GEARSET_18, configVector[4]) // Port 1, Gearset, Reverse-False
-    pros::Motor right_drive_2(configVector[5].first, pros::E_MOTOR_GEARSET_18, configVector[5]) // Port 1, Gearset, Reverse-False
-    pros::Motor right_drive_3(configVector[6].first, pros::E_MOTOR_GEARSET_18, configVector[6]) // Port 1, Gearset, Reverse-False
-    pros::Motor right_drive_4(configVector[7].first, pros::E_MOTOR_GEARSET_18, configVector[7]) // Port 1, Gearset, Reverse-False
+    pros::Motor right_drive_1(configVector[4].first, pros::E_MOTOR_GEARSET_18, configVector[4]); // Port 1, Gearset, Reverse-False
+    pros::Motor right_drive_2(configVector[5].first, pros::E_MOTOR_GEARSET_18, configVector[5]); // Port 1, Gearset, Reverse-False
+    pros::Motor right_drive_3(configVector[6].first, pros::E_MOTOR_GEARSET_18, configVector[6]); // Port 1, Gearset, Reverse-False
+    pros::Motor right_drive_4(configVector[7].first, pros::E_MOTOR_GEARSET_18, configVector[7]); // Port 1, Gearset, Reverse-False
 
-    pros::MotorGroup left_side_motors({left_drive_1, left_drive_2, left_drive_3, left_drive_4})
-    pros::MotorGroup right_side_motors({right_drive_1, right_drive_2, right_drive_3, right_drive_4})
+    pros::MotorGroup left_side_motors({left_drive_1, left_drive_2, left_drive_3, left_drive_4});
+    pros::MotorGroup right_side_motors({right_drive_1, right_drive_2, right_drive_3, right_drive_4});
 
     lemlib::Drivetrain_t drivetrain {
     &left_side_motors, // left drivetrain motors
@@ -117,7 +117,7 @@ void RobotLemLib::initialize()
     // Create Chassis
     lemlib::Chassis chassis(drivetrain, lateralController, angularController, sensors);
 
-    
+
     /* Define the intake components */
     intake_motor = new MotorNode(node_manager, configVector[8].first, "intake", configVector[8].second);
     indexer_motor = new MotorNode(node_manager, configVector[9].first, "indexer", configVector[9].second);
@@ -162,6 +162,7 @@ void RobotLemLib::opcontrol()
     while (true)
     {
         // nodeManager->executeTeleop();
+        // What do? TODO
         tank_drive_node->teleopPeriodic();
         intake_node->teleopPeriodic();
         indexer_node->teleopPeriodic();
