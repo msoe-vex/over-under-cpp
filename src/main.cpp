@@ -8,6 +8,7 @@
 #include "RobotKen.h"
 #include "RobotFatAlbert.h"
 #include "RobotBuddyBoiy.h"
+#include "RobotLemLib.h"
 
 // Below are the definitions for all the objects for both robots
 
@@ -21,6 +22,7 @@ Robot18in* robot18in;
 RobotKen* robotKen;
 RobotFatAlbert* robotFatAlbert;
 RobotBuddyBoiy* robotBuddyBoiy;
+RobotLemLib* robotLemLib;
 
 /* Maps robotNames to IRobots */
 map<std::string, IRobot*> robotMap;
@@ -73,6 +75,7 @@ void initialize() {
     robotKen = new RobotKen;
     robotFatAlbert = new RobotFatAlbert;
     robotBuddyBoiy = new RobotBuddyBoiy;
+    robotLemLib = new RobotLemLib;
 
     /* Maps robot name to initialization function */
     robotMap = {
@@ -82,21 +85,23 @@ void initialize() {
         {"Ken", robotKen},
         {"FatAlbert", robotFatAlbert},
         {"BuddyBoiy", robotBuddyBoiy},
+        {"LemLib", robotLemLib}
     };
 
     /* Gets the name of the robot from the SD Card */
     robotName = getRobotName();
 
     // /* If the robot name can be found in the map, use it. If not, use default. */
-    if (robotMap.find(robotName) != robotMap.end()) {
-        selectedRobot = robotMap[robotName];
-        // Using the overloaded version of updateDisplay() uses the C API that does not require an object
-        selectedRobot->primary_controller->updateDisplay(pros::E_CONTROLLER_MASTER, "Running " + robotName);
-    } else {
-        // use the default robot
-        selectedRobot = robotMap.begin()->second;
-        selectedRobot->primary_controller->updateDisplay(pros::E_CONTROLLER_MASTER, "Running Default (15 in)");
-    }
+    // if (robotMap.find(robotName) != robotMap.end()) {
+    //     selectedRobot = robotMap[robotName];
+    //     // Using the overloaded version of updateDisplay() uses the C API that does not require an object
+    //     selectedRobot->primary_controller->updateDisplay(pros::E_CONTROLLER_MASTER, "Running " + robotName);
+    // } else {
+    //     // use the default robot
+    //     selectedRobot = robotMap.begin()->second;
+    //     selectedRobot->primary_controller->updateDisplay(pros::E_CONTROLLER_MASTER, "Running Default (15 in)");
+    // }
+    selectedRobot = robotMap["LemLib"];
     
     selectedRobot->initialize();
     
