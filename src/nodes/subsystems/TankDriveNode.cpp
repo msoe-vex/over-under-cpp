@@ -18,6 +18,10 @@ void TankDriveNode::withDriveDirectionButtons(pros::controller_digital_e_t fwrd_
     m_bwrd_btn = bwrd_btn;
 }
 
+void TankDriveNode::withDriveDirectionButton(pros::controller_digital_e_t dir_btn) {
+    m_fwrd_btn = dir_btn;
+}
+
 void TankDriveNode::m_setLeftPosition(float distance, int max_velocity) {
     m_motors.left_1_motor->moveAbsolute(distance, max_velocity);
     m_motors.left_2_motor->moveAbsolute(distance, max_velocity);
@@ -122,11 +126,19 @@ void TankDriveNode::teleopPeriodic() {
     // setLeftVoltage(copysign(max(min(fabs(left) / 127.0, 127.0), 0.0) * MAX_MOTOR_VOLTAGE, left));
     // setRightVoltage(copysign(max(min(fabs(right) / 127.0, 127.0), 0.0) * MAX_MOTOR_VOLTAGE, right));
 
-    if (m_controller->get_digital(m_fwrd_btn)) {
-        reverse_direction = false;
-    } else if (m_controller->get_digital(m_bwrd_btn)) {
-        reverse_direction = true;
-    }
+    // Reverse Direction with two buttons
+    // if (m_controller->get_digital(m_fwrd_btn)) {
+    //     reverse_direction = false;
+    // } else if (m_controller->get_digital(m_bwrd_btn)) {
+    //     reverse_direction = true;
+    // }
+
+    // Reverse Direction with one button
+    bool fwd_btn_state = m_controller->get_digital(m_fwrd_btn);
+    if (fwd_btn_state && !m_fwrd_btn_prev) {
+        reverse_direction = !reverse_direction;
+    } 
+    m_fwrd_btn_prev = fwd_btn_state;
 
     // Normal tank drive
     int left = m_controller->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);

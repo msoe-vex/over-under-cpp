@@ -31,6 +31,8 @@ public:
 
     void withDriveDirectionButtons(pros::controller_digital_e_t fwrd_btn,
             pros::controller_digital_e_t bwrd_btn);
+    
+    void withDriveDirectionButton(pros::controller_digital_e_t dir_btn);
 
     void setDriveVoltage(int y_voltage, int theta_voltage);
 
@@ -70,6 +72,8 @@ private:
     pros::controller_digital_e_t m_bwrd_btn;
 
     bool reverse_direction;
+
+    bool m_fwrd_btn_prev
 
     void m_setLeftPosition(float distance, int max_velocity);
 

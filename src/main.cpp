@@ -92,16 +92,16 @@ void initialize() {
     robotName = getRobotName();
 
     // /* If the robot name can be found in the map, use it. If not, use default. */
-    // if (robotMap.find(robotName) != robotMap.end()) {
-    //     selectedRobot = robotMap[robotName];
-    //     // Using the overloaded version of updateDisplay() uses the C API that does not require an object
-    //     selectedRobot->primary_controller->updateDisplay(pros::E_CONTROLLER_MASTER, "Running " + robotName);
-    // } else {
-    //     // use the default robot
-    //     selectedRobot = robotMap.begin()->second;
-    //     selectedRobot->primary_controller->updateDisplay(pros::E_CONTROLLER_MASTER, "Running Default (15 in)");
-    // }
-    selectedRobot = robotMap["LemLib"];
+    if (robotMap.find(robotName) != robotMap.end()) {
+        selectedRobot = robotMap[robotName];
+        // Using the overloaded version of updateDisplay() uses the C API that does not require an object
+        selectedRobot->primary_controller->updateDisplay(pros::E_CONTROLLER_MASTER, "Running " + robotName);
+    } else {
+        // use the default robot
+        selectedRobot = robotMap.begin()->second;
+        selectedRobot->primary_controller->updateDisplay(pros::E_CONTROLLER_MASTER, "Running Default (15 in)");
+    }
+    // selectedRobot = robotMap["LemLib"];
     
     selectedRobot->initialize();
     
