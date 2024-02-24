@@ -73,7 +73,7 @@ private:
 
     bool reverse_direction;
 
-    bool m_fwrd_btn_prev
+    bool m_fwrd_btn_prev;
 
     void m_setLeftPosition(float distance, int max_velocity);
 
