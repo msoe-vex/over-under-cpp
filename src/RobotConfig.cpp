@@ -141,7 +141,7 @@ void RobotConfig::autonomous() {
     //     pros::delay(2);
     // }
     pros::delay(1000);
-    tank_drive_node->moveDriveRelative(250, -250, 100);
+    tank_drive_node->moveDriveRelative(-250, 250, 100);
     pros::delay(1000);
     tank_drive_node->moveDriveRelative(1000, 1000, 100);
     pros::delay(1000);
