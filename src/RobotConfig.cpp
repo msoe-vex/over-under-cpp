@@ -140,9 +140,10 @@ void RobotConfig::autonomous() {
     //     pros::delay(2);
     // }
     pros::delay(3000);
-    tank_drive_node->moveDriveRelative(750, -750, 100);
-    pros::delay(3000);
-    tank_drive_node->moveDriveRelative(2000, 2000, 100);
+    pneumatic_1->useClaw(true);
+    tank_drive_node->moveDriveRelative(250, -250, 100);
+    pros::delay(1000);
+    tank_drive_node->moveDriveRelative(750, 750, 100);
     pros::delay(1000);
 }
 
