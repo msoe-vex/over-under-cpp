@@ -134,15 +134,16 @@ void RobotConfig::autonomous() {
     // (Left side, Right side, speed out of 200)
     pneumatic_3->useClaw(false);
     pneumatic_1->useClaw(false);
-    tank_drive_node->moveDriveRelative(4000, 4000, 100);
+    pros::delay(1000);
+    tank_drive_node->moveDriveRelative(7000, 7000, 100);
     // while (!((left_drive_4->getMotor()->get_position() < 995) && (left_drive_4->getMotor()->get_position() > 1005))) {
     //     // Continue running this loop as long as the motor is not within +-5 units of its goal
     //     pros::delay(2);
     // }
-    pros::delay(3000);
-    tank_drive_node->moveDriveRelative(750, -750, 100);
-    pros::delay(3000);
-    tank_drive_node->moveDriveRelative(2000, 2000, 100);
+    pros::delay(1000);
+    tank_drive_node->moveDriveRelative(250, -250, 100);
+    pros::delay(1000);
+    tank_drive_node->moveDriveRelative(1000, 1000, 100);
     pros::delay(1000);
 }
 
