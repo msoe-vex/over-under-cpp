@@ -37,6 +37,11 @@ public:
     MotorNode *extra_motor_2;
     IntakeNode *extra_node_2;
 
+    ClawNode* pneumatic_1;
+    ClawNode* pneumatic_2;
+    ClawNode* pneumatic_3;
+    ClawNode* pneumatic_4;
+
     void initialize() override;
     void disabled() override;
     void competition_initialize() override;

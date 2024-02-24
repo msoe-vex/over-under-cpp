@@ -83,28 +83,44 @@ void RobotConfig::initialize()
         pros::E_CONTROLLER_DIGITAL_R1, pros::E_CONTROLLER_DIGITAL_L1, {intake_motor});
     intake_node->withControlMode(IntakeNode::ControlMode::TOGGLE_AND_SWITCH);
 
-    indexer_node = new IntakeNode(
-        node_manager, "indexer", primary_controller,
-        pros::E_CONTROLLER_DIGITAL_A, pros::E_CONTROLLER_DIGITAL_B, {indexer_motor});
+    // indexer_node = new IntakeNode(
+    //     node_manager, "indexer", primary_controller,
+    //     pros::E_CONTROLLER_DIGITAL_A, pros::E_CONTROLLER_DIGITAL_B, {indexer_motor});
 
-    /* Define the Roller Components */
-    roller_motor = new MotorNode(node_manager, configVector[10].first, "roller", configVector[10].second);
+    // /* Define the Roller Components */
+    // roller_motor = new MotorNode(node_manager, configVector[10].first, "roller", configVector[10].second);
 
-    roller_node = new IntakeNode(
-        node_manager, "roller", primary_controller,
-        pros::E_CONTROLLER_DIGITAL_L1, pros::E_CONTROLLER_DIGITAL_L2, {roller_motor});
+    // roller_node = new IntakeNode(
+    //     node_manager, "roller", primary_controller,
+    //     pros::E_CONTROLLER_DIGITAL_L1, pros::E_CONTROLLER_DIGITAL_L2, {roller_motor});
     
-    extra_motor_1 = new MotorNode(node_manager, configVector[11].first, "extra1", configVector[11].second);
+    // extra_motor_1 = new MotorNode(node_manager, configVector[11].first, "extra1", configVector[11].second);
 
-    extra_node_1 = new IntakeNode(
-        node_manager, "extra1", primary_controller,
-        pros::E_CONTROLLER_DIGITAL_L1, pros::E_CONTROLLER_DIGITAL_L2, {extra_motor_1});
+    // extra_node_1 = new IntakeNode(
+    //     node_manager, "extra1", primary_controller,
+    //     pros::E_CONTROLLER_DIGITAL_L1, pros::E_CONTROLLER_DIGITAL_L2, {extra_motor_1});
         
-    extra_motor_2 = new MotorNode(node_manager, configVector[12].first, "extra2", configVector[12].second);
+    // extra_motor_2 = new MotorNode(node_manager, configVector[12].first, "extra2", configVector[12].second);
 
-    extra_node_2 = new IntakeNode(
-        node_manager, "extra2", primary_controller,
-        pros::E_CONTROLLER_DIGITAL_X, pros::E_CONTROLLER_DIGITAL_Y, {extra_motor_2});
+    // extra_node_2 = new IntakeNode(
+    //     node_manager, "extra2", primary_controller,
+    //     pros::E_CONTROLLER_DIGITAL_X, pros::E_CONTROLLER_DIGITAL_Y, {extra_motor_2});
+
+    pneumatic_1 = new ClawNode(node_manager, "pneumatic1", primary_controller, 
+        new ADIDigitalOutNode(node_manager, "pneumatic1", 'g'), 
+        pros::E_CONTROLLER_DIGITAL_X);
+    
+    pneumatic_2 = new ClawNode(node_manager, "pneumatic2", primary_controller, 
+        new ADIDigitalOutNode(node_manager, "pneumatic2", 'h'), 
+        pros::E_CONTROLLER_DIGITAL_L2);
+
+    pneumatic_3 = new ClawNode(node_manager, "pneumatic3", primary_controller, 
+        new ADIDigitalOutNode(node_manager, "pneumatic3", 'f'), 
+        pros::E_CONTROLLER_DIGITAL_RIGHT);
+    
+    pneumatic_4 = new ClawNode(node_manager, "pneumatic4", primary_controller, 
+        new ADIDigitalOutNode(node_manager, "pneumatic4", 'e'), 
+        pros::E_CONTROLLER_DIGITAL_R2);
 }
 
 void RobotConfig::disabled() {}
@@ -121,9 +137,9 @@ void RobotConfig::opcontrol()
         // nodeManager->executeTeleop();
         tank_drive_node->teleopPeriodic();
         intake_node->teleopPeriodic();
-        indexer_node->teleopPeriodic();
-        roller_node->teleopPeriodic();
-        extra_node_1->teleopPeriodic();
-        extra_node_2->teleopPeriodic();
+        pneumatic_1->teleopPeriodic();
+        pneumatic_2->teleopPeriodic();
+        pneumatic_3->teleopPeriodic();
+        pneumatic_4->teleopPeriodic();
     }
 }
