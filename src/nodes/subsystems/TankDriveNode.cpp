@@ -6,6 +6,7 @@ TankDriveNode::TankDriveNode(NodeManager* node_manager, std::string handle_name,
         m_motors(motors), 
         m_kinematics(kinematics),
         reverse_direction(false),
+        m_fwrd_btn_prev(false),
         m_fwrd_btn(pros::E_CONTROLLER_DIGITAL_L1),
         m_bwrd_btn(pros::E_CONTROLLER_DIGITAL_R1) {
 
@@ -115,6 +116,17 @@ void TankDriveNode::setDriveVelocity(float x_velocity, float y_velocity, float t
     setDriveVelocity(y_velocity, theta_velocity);
 }
 
+void TankDriveNode::moveDriveRelative(float left_position, float right_position, int velocity) {
+    m_motors.left_1_motor->getMotor()->move_relative(left_position, velocity);
+    m_motors.left_2_motor->getMotor()->move_relative(left_position, velocity);
+    m_motors.left_3_motor->getMotor()->move_relative(left_position, velocity);
+    m_motors.left_4_motor->getMotor()->move_relative(left_position, velocity);
+    m_motors.right_1_motor->getMotor()->move_relative(right_position, velocity);
+    m_motors.right_2_motor->getMotor()->move_relative(right_position, velocity);
+    m_motors.right_3_motor->getMotor()->move_relative(right_position, velocity);
+    m_motors.right_4_motor->getMotor()->move_relative(right_position, velocity);
+}
+
 void TankDriveNode::teleopPeriodic() {
     // Split driving
     // int left_y = m_controller->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
@@ -145,11 +157,11 @@ void TankDriveNode::teleopPeriodic() {
     int right = m_controller->get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
 
     if (reverse_direction) {
-        setLeftVoltage(copysign(max(min(fabs(-right) / 127.0, 127.0), 0.0) * MAX_MOTOR_VOLTAGE, left));
-        setRightVoltage(copysign(max(min(fabs(-left) / 127.0, 127.0), 0.0) * MAX_MOTOR_VOLTAGE, right));
+        setLeftVoltage(-right / 127.0 * MAX_MOTOR_VOLTAGE);
+        setRightVoltage(-left / 127.0 * MAX_MOTOR_VOLTAGE);
     } else {
-        setLeftVoltage(copysign(max(min(fabs(left) / 127.0, 127.0), 0.0) * MAX_MOTOR_VOLTAGE, left));
-        setRightVoltage(copysign(max(min(fabs(right) / 127.0, 127.0), 0.0) * MAX_MOTOR_VOLTAGE, right));
+        setLeftVoltage(left / 127.0 * MAX_MOTOR_VOLTAGE);
+        setRightVoltage(right / 127.0 * MAX_MOTOR_VOLTAGE);
     }
 }
 

@@ -72,6 +72,7 @@ void RobotConfig::initialize()
     tank_drive_node = new TankDriveNode(
         node_manager, "tankDrive", primary_controller,
         tank_drive_motors, *tank_kinematics);
+    tank_drive_node->withDriveDirectionButton(pros::E_CONTROLLER_DIGITAL_Y);
 
     /* Define the intake components */
     intake_motor = new MotorNode(node_manager, configVector[8].first, "intake", configVector[8].second);

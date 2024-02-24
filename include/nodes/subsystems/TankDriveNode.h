@@ -42,6 +42,8 @@ public:
 
     void setDriveVelocity(float x_velocity, float y_velocity, float theta_velocity);
 
+    void moveDriveRelative(float x_position, float y_position, int velocity);
+    
     void setLeftVoltage(int voltage);
 
     void setRightVoltage(int voltage);
