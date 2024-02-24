@@ -127,7 +127,24 @@ void RobotConfig::disabled() {}
 
 void RobotConfig::competition_initialize() {}
 
-void RobotConfig::autonomous() {}
+void RobotConfig::autonomous() {
+    // chassis->turnTo(53, 53, 1000); // turn to the point (53, 53) with a timeout of 1000 ms
+    // left_drive_4->moveVoltage(12000);
+
+    // (Left side, Right side, speed out of 200)
+    pneumatic_3->useClaw(false);
+    pneumatic_1->useClaw(false);
+    tank_drive_node->moveDriveRelative(4000, 4000, 100);
+    // while (!((left_drive_4->getMotor()->get_position() < 995) && (left_drive_4->getMotor()->get_position() > 1005))) {
+    //     // Continue running this loop as long as the motor is not within +-5 units of its goal
+    //     pros::delay(2);
+    // }
+    pros::delay(3000);
+    tank_drive_node->moveDriveRelative(750, -750, 100);
+    pros::delay(3000);
+    tank_drive_node->moveDriveRelative(2000, 2000, 100);
+    pros::delay(1000);
+}
 
 // Must put all telepPeriodic() method from each class into here
 void RobotConfig::opcontrol()
