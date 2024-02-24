@@ -7,7 +7,7 @@ void RobotConfig::readConfig()
 
     if (file.is_open())
     {
-        for (int i = 0; i < 13; ++i)
+        for (int i = 0; i < 17; ++i)
         {
             configVector.push_back(std::make_pair(readPort(file), readReversed(file)));
         }
@@ -79,7 +79,8 @@ void RobotConfig::initialize()
 
     intake_node = new IntakeNode(
         node_manager, "intake", primary_controller,
-        pros::E_CONTROLLER_DIGITAL_A, pros::E_CONTROLLER_DIGITAL_B, {intake_motor});
+        pros::E_CONTROLLER_DIGITAL_R1, pros::E_CONTROLLER_DIGITAL_L1, {intake_motor});
+    intake_node->withControlMode(IntakeNode::ControlMode::TOGGLE_AND_SWITCH);
 
     indexer_node = new IntakeNode(
         node_manager, "indexer", primary_controller,
